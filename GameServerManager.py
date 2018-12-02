@@ -40,10 +40,17 @@ def lif ():
         removeserverlif()
 
     elif num == '3':
-        print('Sorry this function is not implemented yet')
-        lif()
+        lifupdate()
+
     elif num == '4':
         mainmenu()
+
+def lifupdate ():
+    print("Updating Server...")
+    with open(os.path.join(directory1, 'ServerUpdate.bat'), 'w') as OPATH:
+        OPATH.writelines(['@echo off\n'
+                          'C:/Users/' + user + '/Desktop/GameServerManager/Servers/Lif/SteamCMD/steamcmd.exe +login anonymous +force_install_dir C:/Users/' + user + '/Desktop/GameServerManager/Servers/Lif +app_update 320850 validate +quit'])
+    os.system('C:/Users/' + user + '/Desktop/GameServerManager/Servers/Lif/SteamCMD/ServerUpdate.bat')
 
 def lifinstall ():
     print('Creating folders...')
