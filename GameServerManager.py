@@ -1,3 +1,11 @@
+import subprocess
+import sys
+
+try:
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "wget", "zipfile", "os", "shutil", "sys" , "time", "winshell", "Dispatch", "upnpy", "pywin32"])
+except:
+    print()
+    
 import wget
 import zipfile
 import os
@@ -11,6 +19,12 @@ import upnpy
 user = os.getlogin()
 directory2 = 'C:/Users/' + user + '/Desktop/GameServerManager/Servers/Lif/docs'
 directory3 = 'C:/Users/' + user + '/Desktop/GameServerManager/Servers/Lif'
+
+try:
+    os.system("python pywin32_postinstall.py -install")
+    
+except:
+    print()
 
 def mainmenu ():
     print("\n")
@@ -115,12 +129,12 @@ def lif ():
 
 
 def arma3Install():
-    driveLetter = 'D';
     game = 'Arma3'
     saveloc = driveLetter + ":/Users/" + user + "/Desktop"
     permfiles = "/GameServerManager/Servers/" + game
     fullsave = saveloc + permfiles
 
+    driveLetter = input('Enter the drive letter to install too: ')
 
     try:
         print('Creating folders...')
@@ -140,32 +154,27 @@ def arma3Install():
             OPATH.writelines(['@echo off \n'
                           + driveLetter + ':/Apps/Steam' + '/steamcmd.exe +quit'])
 
-        try:
-            print("Creating Arma3server_steamcmd.cmd...")
-            with open(os.path.join(driveLetter + ':/Games/ArmA3/A3Files', 'Arma3server_steamcmd.cmd'), 'w') as OPATH:
-                OPATH.writelines(['@echo off \n' +
-                                '@rem http://media.steampowered.com/installer/steamcmd.zip \n' +
-                                'SETLOCAL ENABLEDELAYEDEXPANSION \n' +
-                                'SET STEAMLOGIN=<USERNAME> <PASSWORD>  \n' +
-                                'SET A3serverBRANCH=233780 -beta \n' +
-                                'SET A3serverPath=D:\Games\ArmA3\A3Master \n' +
-                                '	SET STEAMPATH=D:\Apps\Steam \n' +
-                                'echo. \n' +
-                                'echo     You are about to update Arma 3 server \n' +
-                                'echo        Dir: %A3serverPath% \n' +
-                                'echo        Branch: %A3serverBRANCH% \n' +
-                                'echo. \n' +
-                                'echo     Key "ENTER" to proceed \n' +
-                                'pause \n' +
-                                'D:\Apps\Steam\steamcmd.exe +login mrnicknick1234 bd16101999WW21945 +force_install_dir D:\Games\ArmA3\A3Master +"app_update 233780" validate +quit \n' +
-                                'echo . \n' +
-                                'echo     Your Arma 3 server is now up to date \n' +
-                                'echo     key "ENTER" to exit \n' +
-                                'pause \n'
-                                ])
-        except:
-            print("Make sure to change <USERNAME> and <PASSWORD> in the GameServerManager.py on line 149")
-            
+        print("Creating Arma3server_steamcmd.cmd...")
+        with open(os.path.join(driveLetter + ':/Games/ArmA3/A3Files', 'Arma3server_steamcmd.cmd'), 'w') as OPATH:
+            OPATH.writelines(['@echo off \n' +
+                              '@rem http://media.steampowered.com/installer/steamcmd.zip \n' +
+                              'SETLOCAL ENABLEDELAYEDEXPANSION \n' +
+                              'SET A3serverBRANCH=233780 -beta \n' +
+                              'SET A3serverPath=D:\Games\ArmA3\A3Master \n' +
+                              'echo. \n' +
+                              'echo     You are about to update Arma 3 server \n' +
+                              'echo        Dir: %A3serverPath% \n' +
+                              'echo        Branch: %A3serverBRANCH% \n' +
+                              'echo. \n' +
+                              'echo     Key "ENTER" to proceed \n' +
+                              'pause \n' +
+                               driveLetter + ':\Apps\Steam\steamcmd.exe +login mrnicknick1234 bd16101999WW21945 +force_install_dir ' + driveLetter + ':\Games\ArmA3\A3Master +"app_update 233780" validate +quit \n' +
+                              'echo . \n' +
+                              'echo     Your Arma 3 server is now up to date \n' +
+                              'echo     key "ENTER" to exit \n' +
+                              'pause \n'
+                              ])
+
         print("Installing ArmA3 Server...")
         os.system(driveLetter + ':/Games/ArmA3/A3Files/Arma3server_steamcmd.cmd')
 
@@ -273,10 +282,10 @@ def arma3Install():
         print("Creating desktop shortcut")
         desktop = winshell.desktop()
         path = os.path.join(desktop, "ArmA3Server.lnk")
-        target = r"D:\Games\Arma3\A3Master\arma3server.exe"
-        wDir = r"D:\Games\Arma3\A3Master"
-        icon = r"D:\Games\Arma3\A3Master\arma3server.exe"
-        args = ["-profiles=D:\Games\Arma3\A3Master","-port=2302","-config=CONFIG_server.cfg","-world=empty"]
+        target = r"" + driveLetter + ":\Games\Arma3\A3Master\arma3server.exe"
+        wDir = r"" + driveLetter + ":\Games\Arma3\A3Master"
+        icon = r"" + driveLetter + ":\Games\Arma3\A3Master\arma3server.exe"
+        args = ["-profiles=" + driveLetter + ":\Games\Arma3\A3Master","-port=2302","-config=CONFIG_server.cfg","-world=empty"]
 
         shell = Dispatch('WScript.Shell')
         shortcut = shell.CreateShortCut(path)
@@ -288,6 +297,8 @@ def arma3Install():
 
     except:
         print("Error")
+
+    ip = input('Enter computer IP (Not the public ip!): ')
 
     print("Opening up the ports via UPnP...")
     upnp = upnpy.UPnP()
@@ -302,7 +313,7 @@ def arma3Install():
         NewExternalPort=2302,
         NewProtocol='UDP',
         NewInternalPort=2302,
-        NewInternalClient='192.168.0.115',
+        NewInternalClient=ip,
         NewEnabled=1,
         NewPortMappingDescription='ArmA3 Server Port 1',
         NewLeaseDuration=0
@@ -312,7 +323,7 @@ def arma3Install():
         NewExternalPort=2303,
         NewProtocol='UDP',
         NewInternalPort=2303,
-        NewInternalClient='192.168.0.115',
+        NewInternalClient=ip,
         NewEnabled=1,
         NewPortMappingDescription='ArmA3 Server Port 2',
         NewLeaseDuration=0
@@ -320,18 +331,20 @@ def arma3Install():
     arma3()
 
 def arma3Update ():
+    driveLetter = input('Enter the drive letter where the server is installed: ')
     print("Updating ArmA3 Server...")
-    os.system('D:/Games/ArmA3/A3Files/Arma3server_steamcmd.cmd')
+    os.system(driveLetter + ':/Games/ArmA3/A3Files/Arma3server_steamcmd.cmd')
     arma3()
 
 def removeArma3 ():
-    print("Removing server files...")
-    shutil.rmtree('D:/Games/ArmA3')
+    driveLetter = input('Enter the drive letter where the server is installed: ')
+    print("Removing gameserver files...")
+    shutil.rmtree(driveLetter + ':/Games/ArmA3')
     arma3()
 
 def arma3Run ():
     print("Starting ArmA3 server...")
-    os.system('D:/Games/Arma3/A3Master/arma3server.exe -profiles=D:/Games/Arma3/A3Master -port=2302 -config=CONFIG_server.cfg -world=empty')
+    os.system(driveLetter + ':/Games/Arma3/A3Master/arma3server.exe -profiles=' + driveLetter + ':/Games/Arma3/A3Master -port=2302 -config=CONFIG_server.cfg -world=empty')
     arma3()
 
 def lifupdate ():
@@ -347,6 +360,8 @@ def lifinstall ():
     saveloc = "C:/Users/" + user + "/Desktop"
     permfiles = "/GameServerManager/Servers/" + game
     fullsave = saveloc + permfiles
+
+    print('Installing to ' + fullsave);
 
     print('Creating folders...')
     os.makedirs(fullsave+'/SteamCMD')
@@ -457,6 +472,8 @@ def removeserverlif ():
     lif()
 
 def rustinstall():
+    print('Installing to ' + 'C:/Users/' + user + '/Desktop/GameServerManager/Servers/Rust)')
+    
     print('Creating folders...')
     os.makedirs('C:/Users/' + user + '/Desktop/GameServerManager/Servers/Rust/SteamCMD')
 
@@ -473,7 +490,7 @@ def rustinstall():
     with open(os.path.join('C:/Users/' + user + '/Desktop/GameServerManager/Servers/Rust/SteamCMD', 'ServerInstall.bat'), 'w') as OPATH:
         OPATH.writelines(['@echo off\n'
                           'C:/Users/' + user + '/Desktop/GameServerManager/Servers/Rust/SteamCMD/steamcmd.exe +login anonymous +force_install_dir C:/Users/' + user + '/Desktop/GameServerManager/Servers/Rust +app_update 258550 validate +quit'])
-
+        
     print('Downloading server files...')
     os.system('C:/Users/' + user + '/Desktop/GameServerManager/Servers/Rust/SteamCMD/ServerInstall.bat')
 
