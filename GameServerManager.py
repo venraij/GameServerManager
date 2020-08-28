@@ -130,11 +130,11 @@ def lif ():
 
 def arma3Install():
     game = 'Arma3'
+    driveLetter = input('Enter the drive letter to install too: ')
+    
     saveloc = driveLetter + ":/Users/" + user + "/Desktop"
     permfiles = "/GameServerManager/Servers/" + game
     fullsave = saveloc + permfiles
-
-    driveLetter = input('Enter the drive letter to install too: ')
 
     try:
         print('Creating folders...')
