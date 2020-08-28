@@ -1,4 +1,4 @@
-#DON'T USE THE EXE VERSION. IT IS NOT WORKING ANYMORE.
+# DON'T USE THE EXE VERSION. IT IS NOT WORKING ANYMORE.
 
 # GameServerManager
 Hello here you can find all the latest files for my little project.
