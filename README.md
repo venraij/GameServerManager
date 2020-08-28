@@ -7,6 +7,8 @@ Hello here you can find all the latest files for my little project.
 
 Arma 3 has a customized installation script.
 
-# Installation
-1. Make sure to have python 3 installed (https://www.python.org/downloads/)
-2. Run the GameServerManager.py
+# Guide
+1. Download the master branche (https://github.com/venraij/GameServerManager/archive/master.zip)
+2. Extract wherever you like.
+3. Make sure to have python 3 installed (https://www.python.org/downloads/)
+4. Run the GameServerManager.py
