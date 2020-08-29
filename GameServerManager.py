@@ -342,6 +342,7 @@ def removeArma3 ():
     arma3()
 
 def arma3Run ():
+    driveLetter = input('Enter the drive letter where the server is installed: ')
     print("Starting ArmA3 server...")
     os.system(driveLetter + ':/Games/Arma3/A3Master/arma3server.exe -profiles=' + driveLetter + ':/Games/Arma3/A3Master -port=2302 -config=CONFIG_server.cfg -world=empty')
     arma3()
