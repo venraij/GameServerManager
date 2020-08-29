@@ -12,3 +12,6 @@ Arma 3 has a customized installation script.
 2. Extract wherever you like.
 3. Make sure to have python 3 installed (https://www.python.org/downloads/)
 4. Run the GameServerManager.py
+
+For installing Arma 3 Server:
+Make sure to replace <username> and <password> in the gameservermanager.py with 2nd steam account login.
