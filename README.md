@@ -14,4 +14,4 @@ Arma 3 has a customized installation script.
 4. Run the GameServerManager.py
 
 For installing Arma 3 Server:
-Make sure to replace "<username>" and "<password>" in the gameservermanager.py with 2nd steam account login.
+Make sure to replace "username" and "password" in the gameservermanager.py with 2nd steam account login.
