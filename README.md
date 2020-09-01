@@ -3,7 +3,7 @@
 # GameServerManager
 Hello here you can find all the latest files for my little project.
 
-!All files of Rust and Lif are downloaded to a folder on your desktop!
+!Rust and Lif temporarily don't work!
 
 Arma 3 has a customized installation script.
 
