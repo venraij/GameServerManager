@@ -1,5 +1,6 @@
-import subprocess, os, sys
-from checkSteamCmd import setupSteamCmd
+import os
+from checkSteamCmd import setup_steam_cmd
+
 
 class bcolors:
     HEADER = '\033[95m'
@@ -11,16 +12,21 @@ class bcolors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
-def setupTool():
+
+def setup_tool():
     try:
-        subprocess.check_call([sys.executable, "-m", "pip3", "install", "wget zipfile os shutil sys time winshell Dispatch UPnPy socket py-steamcmd-wrapper pywin32"])
-        os.system("python pywin32_postinstall.py -install")
-    except:
+        os.system("python -m pip install wget winshell Dispatch pywin32")
+        os.system("pip install py-steamcmd-wrapper")
+        os.system("pywin32-228.win32-py3.8.exe")
+        os.system("pywin32-228.win-amd64-py3.8.exe")
+    except OSError as e:
         print('Failed installation of dependencies.')
+        print(e)
 
     try:
-        os.makedirs(os.path.join(os.getcwd(),"steamcmd"))
-    except:
+        os.makedirs(os.path.join(os.getcwd(), "steamcmd"))
+    except OSError as e:
         print("SteamCMD folder already exists.")
-        
-    setupSteamCmd();
+        print(e)
+
+    setup_steam_cmd()

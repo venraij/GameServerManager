@@ -1,5 +1,6 @@
 import os
-from pysteamcmdwrapper import SteamCMD
+from pysteamcmdwrapper import SteamCMD, SteamCMDException
+
 
 class bcolors:
     HEADER = '\033[95m'
@@ -11,10 +12,10 @@ class bcolors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
-def setupSteamCmd():
-    s = SteamCMD(os.path.join(os.getcwd(),"steamcmd"))
+
+def setup_steam_cmd():
+    s = SteamCMD(os.path.join(os.getcwd(), "steamcmd"))
     try:
         s.install()
-    except:
+    except SteamCMDException:
         print("SteamCMD already installed.")
-

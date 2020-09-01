@@ -1,3 +1,7 @@
+from initialSetup import setup_tool
+from screens import main_menu
+
+
 class bcolors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -8,10 +12,7 @@ class bcolors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
-from initialSetup import setupTool
-setupTool()
 
-from screens import mainMenu
+setup_tool()
 
-mainMenu()
-
+main_menu()
