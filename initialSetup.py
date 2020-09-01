@@ -1,4 +1,4 @@
-import subprocess, os, sys
+import os, sys
 from checkSteamCmd import setupSteamCmd
 
 class bcolors:
@@ -13,7 +13,7 @@ class bcolors:
 
 def setupTool():
     try:
-        subprocess.check_call([sys.executable, "-m", "pip3", "install", "wget zipfile os shutil sys time winshell Dispatch UPnPy socket py-steamcmd-wrapper pywin32"])
+        os.system("python pip install wget zipfile os shutil sys time winshell Dispatch UPnPy socket py-steamcmd-wrapper pywin32 pypiwin32")
         os.system("python pywin32_postinstall.py -install")
     except:
         print('Failed installation of dependencies.')
