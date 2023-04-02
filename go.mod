@@ -1,3 +1,4 @@
-module github.com/venraij/GameServerManager
+module github.com/venraij/SteamCMDWrapper
 
 go 1.20
+
